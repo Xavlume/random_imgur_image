@@ -5,7 +5,6 @@ from io import BytesIO
 from PIL import ImageTk, Image, UnidentifiedImageError
 import os
 import urllib3
-from time import time
 
 os.chdir(r'D:\code\cmnoNow\random_imgur_image') #My working dir
 
@@ -63,9 +62,8 @@ tkinter_panel = Label(root, image = img)
 tkinter_panel.pack(side = "bottom", fill = "both", expand = "yes")
 
 def reload_image(event):
-    now = time()
     download_random_imgur_image(5)
-    print(time()-now)
+
     imgur_image = ImageTk.PhotoImage(Image.open(download_image_path))
     tkinter_panel.configure(image=imgur_image)
     tkinter_panel.image = imgur_image
