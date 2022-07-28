@@ -47,6 +47,8 @@ def download_random_imgur_image(chars_length, chars = string.ascii_lowercase + s
 
     imgur_url = get_random_imgur_url(length, chars)
     
+    root.title(imgur_url)
+
     success, image = returnImage(imgur_url)
 
     if not success or image is None or image == defImg: # If image is imgur.png, or it doesn't exist, get a new one
