@@ -1,14 +1,15 @@
 import random
 import string
 from tkinter import *
-import requests as requests
 from io import BytesIO
 from PIL import ImageTk, Image, UnidentifiedImageError
 import os
+import urllib3
+from time import time
 
-os.chdir(r'D:\code\cmnoNow\sle') #My working dir
+os.chdir(r'D:\code\cmnoNow\random_imgur_image') #My working dir
 
-s = requests.Session()
+http = urllib3.PoolManager()
 
 defImg = Image.open('imgur.png') #default imgur image not found png
 
@@ -32,12 +33,12 @@ def returnImage(imgur_url, headers = None):
     if headers is None:
         headers = hdr
 
-    response = s.get(imgur_url, headers = headers)
-    if response.status_code == 404:
+    response = http.request("GET", imgur_url, headers = headers)
+    if response.status == 404:
         return False, ''
 
     try:
-        image = Image.open(BytesIO(response.content))
+        image = Image.open(BytesIO(response.data))
         return True, image
     except UnidentifiedImageError:
         return False, ''
@@ -62,8 +63,9 @@ tkinter_panel = Label(root, image = img)
 tkinter_panel.pack(side = "bottom", fill = "both", expand = "yes")
 
 def reload_image(event):
+    now = time()
     download_random_imgur_image(5)
-
+    print(time()-now)
     imgur_image = ImageTk.PhotoImage(Image.open(download_image_path))
     tkinter_panel.configure(image=imgur_image)
     tkinter_panel.image = imgur_image
