@@ -6,9 +6,9 @@ This python script fetches and displays a pseudo-random image from imgur.com usi
 
 ## Setup
 
-Before running Main.py, you can change a couuple lines of code to best suit your needs.
+Before running Main.py, you can change a couple lines of code to best suit your needs.
 
-Line 9 - Chnage the working directory of the project
+Line 9 - Change the working directory of the project
 ```
 os.chdir(r'D:\code\cmnoNow\random_imgur_image')  # My working dir
 ```
@@ -24,6 +24,4 @@ You can see a full list of Tkinter keys via [this link](https://anzeljg.github.i
 root.bind('<Return>', reload_image)
 
 root.bind('<BackSpace>', hide_image)
-```
-
-    
+``` 
